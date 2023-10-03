@@ -2,6 +2,16 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: [
-    '@nuxtjs/tailwindcss'
-  ]
+    '@nuxtjs/tailwindcss',
+    '@nuxtjs/supabase'
+  ],
+  supabase: {
+    redirectOptions: {
+      login: '/auth/login',
+      callback: '/confirm',
+      exclude: [
+        '/auth/register'
+      ],
+    }
+  }
 })

@@ -1,13 +1,14 @@
 <template>
-  <div class="w-[500px] h-auto flex flex-col items-center p-8 bg-white bg-opacity-30 backdrop-blur-[10px] rounded-lg drop-shadow-2xl relative">
+  <form @submit.prevent="signIn" class="w-[500px] h-auto flex flex-col items-center p-8 bg-white bg-opacity-30 backdrop-blur-[10px] rounded-lg drop-shadow-2xl relative">
     <img src="~~/public/logo.svg" class="w-auto h-[100px]" />
     <h2 class="pt-4 text-xxl text-[#f47b97]">Sign in to your account</h2>
     <div class="w-full h-auto pt-4">
-        <Input :label="'Email'" />
-        <Input :label="'Password'" />
+        <Input :label="'Email'" v-model="email" />
+        <Input :label="'Password'" v-model="password"  />
+        <div class="mt-2 text-[red] text-lg">{{ errorMsg }}</div>
     </div>
     <div class="w-full mt-6">
-        <Button :label="'Login'" />
+        <Button :label="'Login'" type="submit"/>
     
         <div className="w-full my-4">
             <div className="relative">
@@ -22,14 +23,37 @@
             </div>
         </div>
     
-        <Button :label="'Register'" :color="'secondary'" />
+        <Button :label="'Register'" :color="'secondary'" @click="router.push('/auth/register')" />
     </div>
-  </div>
+  </form>
 </template>
 
 <script setup>
-import Input from '~~/components/UI/Input'
-import Button from '~~/components/UI/Button'
+  import { useRouter } from 'vue-router';
+  import Input from '~~/components/UI/Input'
+  import Button from '~~/components/UI/Button'
+
+  const client = useSupabaseClient()
+  const router = useRouter()
+
+  const email = ref('')
+  const password = ref(null)
+  const errorMsg = ref('')
+
+  const signIn = async () => {
+    try {
+        const { data, error } = await client.auth.signInWithPassword({
+            email: email.value,
+            password: password.value,
+        })
+
+        if (error) throw error
+
+        router.push('/')
+    } catch (error) {
+        errorMsg.value = error.message
+    }
+  }
 
 </script>
 
