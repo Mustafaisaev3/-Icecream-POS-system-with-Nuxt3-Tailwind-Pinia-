@@ -1,7 +1,7 @@
 <template>
     <div class="">
       <!-- <NuxtWelcome /> -->
-      <div class="w-full h-full">
+      <div class="w-full h-full p-8">
         Main Page
         <IconCart class="text-[20px]" />
       </div>
@@ -9,8 +9,6 @@
 </template>
 
 <script setup>
-import IconCart from '~icons/mdi/cart'
-
 
 </script>
   

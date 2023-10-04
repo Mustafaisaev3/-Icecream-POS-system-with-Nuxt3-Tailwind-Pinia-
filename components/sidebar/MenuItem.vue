@@ -17,7 +17,7 @@
     <div class=" text-[#fc5a95] rounded-md">
       <slot></slot>
     </div>
-    <div class="text-lg text-[#fc5a95] flex-1 hidden md:block">
+    <div class="text-lg font-semibold text-[#fc5a95] flex-1 hidden md:block">
         {{ label }}
     </div>
   </div>
