@@ -1,7 +1,16 @@
 <template>
     <div class="">
       <!-- <NuxtWelcome /> -->
-      <div class="w-full h-full">Main Page</div>
+      <div class="w-full h-full">
+        Main Page
+        <IconCart class="text-[20px]" />
+      </div>
     </div>
-  </template>
+</template>
+
+<script setup>
+import IconCart from '~icons/mdi/cart'
+
+
+</script>
   
